@@ -1,7 +1,10 @@
 # SQL Server to PostgreSQL Migration Summary
 
 ## Overview
-This document summarizes the SQL Server to PostgreSQL migration performed for the Northwind database.
+This document summarizes the SQL Server to PostgreSQL migration performed for the Northwind database, completed on June 2, 2025.
+
+## Project Scope
+The migration included converting all database objects from SQL Server to PostgreSQL-compatible syntax and structure. This was a schema-only migration, with data migration to be performed as a separate phase.
 
 ## Migrated Objects
 
@@ -11,6 +14,13 @@ This document summarizes the SQL Server to PostgreSQL migration performed for th
 - Views: 16
 - Functions (from stored procedures): 8
 - Roles/Users: 3
+
+### File Organization
+- `postgresql-scripts/00_create_northwind_database.sql` - Main script that creates the entire database
+- `postgresql-scripts/schema/` - Individual object creation scripts
+- `postgresql-scripts/validate_migration.sql` - Script to validate migration success
+- `SQL_to_PostgreSQL_Data_Type_Mapping.md` - Detailed data type mapping reference
+- `PostgreSQL_Setup_Instructions.md` - Instructions for setting up the database
 
 ### Migration Details
 

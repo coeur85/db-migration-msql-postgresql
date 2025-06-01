@@ -6,6 +6,7 @@ This guide provides step-by-step instructions for setting up the Northwind datab
 
 1. PostgreSQL (version 12 or higher) installed
 2. psql command-line tool or a PostgreSQL client like PgAdmin
+3. Proper permissions to create databases and roles
 
 ## Setup Instructions
 
@@ -20,6 +21,58 @@ This guide provides step-by-step instructions for setting up the Northwind datab
    ```sql
    CREATE DATABASE northwind WITH ENCODING = 'UTF8';
    ```
+
+3. Connect to the newly created database
+   ```bash
+   \c northwind
+   ```
+
+4. Run the main database creation script
+   ```bash
+   \i /path/to/00_create_northwind_database.sql
+   ```
+
+5. Verify the database structure
+   ```bash
+   \i /path/to/validate_migration.sql
+   ```
+
+### Using PgAdmin
+
+1. Connect to your PostgreSQL server
+2. Right-click on Databases and select "Create > Database"
+3. Name it "northwind" and set encoding to UTF8
+4. Right-click on the new database and select "Query Tool"
+5. Open and execute the 00_create_northwind_database.sql file
+6. Run validate_migration.sql to verify the structure
+
+## Data Import
+
+After setting up the database structure:
+
+1. Prepare data export files from SQL Server (CSV or SQL INSERT statements)
+2. For CSV files, use PostgreSQL's COPY command:
+   ```sql
+   COPY public.tablename FROM '/path/to/data.csv' WITH (FORMAT csv, HEADER true);
+   ```
+3. For SQL files with INSERT statements, run them using psql or PgAdmin
+
+## Connection Information
+
+Default connection details (customize as needed):
+- Host: localhost
+- Port: 5432
+- Database: northwind
+- User roles available:
+  - exceluser: Read-only access
+  - northwindwebapp: Read/write access
+  - northwinddevuser: Administrative access
+
+## Troubleshooting
+
+- Check PostgreSQL logs at /var/log/postgresql/ (Linux) or in the Data directory (Windows)
+- Verify schema creation with: `\dt public.*`
+- Check role creation with: `\du`
 
 3. Connect to the new database
    ```
